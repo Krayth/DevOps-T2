@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-nginx
+  template:
+    metadata:
+      labels:
+        app: todo-nginx
+    spec:
+      containers:
+      - name: todo-nginx
+        image: todo-nginx
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 2000
+        resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"

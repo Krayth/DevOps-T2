@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-redis
+  template:
+    metadata:
+      labels:
+        app: todo-redis
+    spec:
+      containers:
+      - name: todo-redis
+        image: redis:latest
+        ports:
+        - containerPort: 6379
+        resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"

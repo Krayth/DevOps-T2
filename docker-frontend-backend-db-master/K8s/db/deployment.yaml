@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-db
+  labels:
+    app: todo-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: todo-db
+    spec:
+      containers:
+      - name: todo-db
+        image: mongo
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 3306
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: todo-db-secret
+                key: username
+          - name: MONGO_INITDB_ROOT_PASSWORD 
+            valueFrom:
+              secretKeyRef:
+                name: todo-db-secret
+                key: password
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+        volumeMounts:
+          - name: todo-persistent-storage
+            mountPath: /data/db
+      volumes:
+        - name: todo-persistent-storage
+          persistentVolumeClaim:
+            claimName: todo-pv-claim

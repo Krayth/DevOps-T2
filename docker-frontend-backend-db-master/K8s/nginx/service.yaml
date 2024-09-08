@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-nginx
+spec:
+  selector:
+    app: todo-nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 2000
+  type: ClusterIP
