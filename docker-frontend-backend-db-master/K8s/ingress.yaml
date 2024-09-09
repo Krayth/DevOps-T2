@@ -15,4 +15,4 @@ spec:
           service:
             name: todo-nginx
             port:
-              number: 80
+              number: 2000

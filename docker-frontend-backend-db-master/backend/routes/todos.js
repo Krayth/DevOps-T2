@@ -4,7 +4,7 @@ const redis = require("redis");
 const Todo = require("../models/todo");
 
 const redisClient = redis.createClient({
-  host: 'redis',
+  host: 'todo-redis',
   port: 6379
 });
 
