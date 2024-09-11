@@ -6,13 +6,20 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: todo.k8s.local 
+  - host: todo.k8s.local
     http:
       paths:
-      - path: /
+      - path: /todo
         pathType: Prefix
         backend:
           service:
-            name: todo-nginx
+            name: todo-frontend
             port:
-              number: 2000
+              number: 3000
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: todo-backend
+            port:
+              number: 3001
