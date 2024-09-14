@@ -14,7 +14,7 @@ async function main() {
   const port = process.env.MONGO_INITDB_PORT || "27017";
   const database = "todos";
   
-  const uri = `mongodb://${username}:${password}@${host}:${port}/${database}?authSource=admin`;
+  const uri = `mongodb://${username}:${password}@${host}:${port}/${database}`;
   console.log(`Connecting to MongoDB with URI: ${uri}`);  
 
   try {
