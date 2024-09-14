@@ -1,38 +1,30 @@
 const express = require("express");
+const cors = require('cors');
 const mongoose = require("mongoose");
-const redis = require("redis");
-
-const backendPort = process.env.PORT || 3001; // Porta para o backend
+const port = 3001;
 const routes = require("./routes");
 
 main().catch((err) => console.log(err));
 
 async function main() {
-  const username = process.env.MONGO_INITDB_ROOT_USERNAME;
-  const password = process.env.MONGO_INITDB_ROOT_PASSWORD;
-  const host = process.env.MONGO_INITDB_HOST || "todo-db";
-  const port = process.env.MONGO_INITDB_PORT || "27017";
-  const database = "todos";
-  
-  const uri = `mongodb://${username}:${password}@${host}:${port}/${database}`;
-  console.log(`Connecting to MongoDB with URI: ${uri}`);  
+  const mongoUser=process.env.MONGO_INITDB_ROOT_USERNAME;
+  const mongoPass=process.env.MONGO_INITDB_ROOT_PASSWORD;
+  const mongoHost = 'todo-db';
+  const mongPort = '27017';
+  const mongoDb = 'admin';
 
-  try {
-    await mongoose.connect(uri, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-    });
-    console.log('MongoDB connected successfully');
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-  }
+  console.log(`mongodb://${mongoUser}:${mongoPass}@${mongoHost}:${mongPort}/${mongoDb}`);
 
+  await mongoose.connect(`mongodb://${mongoUser}:${mongoPass}@${mongoHost}:${mongPort}/${mongoDb}`, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  });
   const app = express();
-  app.use(express.static("public"));
+  app.use(cors());
   app.use(express.json());
   app.use("/api", routes);
 
-  app.listen(backendPort, () => {
-    console.log(`Server is listening on port: ${backendPort}`);
+  app.listen(port, () => {
+    console.log(`Server is listening on port: ${port}`);
   });
 }

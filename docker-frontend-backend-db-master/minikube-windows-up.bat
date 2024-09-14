@@ -30,13 +30,6 @@ cd ..
 
 timeout /t 10 /nobreak >nul
 
-cd redis
-minikube kubectl -- apply -f deployment.yaml
-minikube kubectl -- apply -f service.yaml
-cd ..
-
-timeout /t 10 /nobreak >nul
-
 cd backend
 minikube kubectl -- apply -f deployment.yaml
 minikube kubectl -- apply -f service.yaml

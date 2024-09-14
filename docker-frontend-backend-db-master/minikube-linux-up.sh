@@ -30,13 +30,6 @@ cd ..
 
 sleep 10
 
-cd redis
-minikube kubectl -- apply -f deployment.yaml
-minikube kubectl -- apply -f service.yaml
-cd ..
-
-sleep 10
-
 cd backend
 minikube kubectl -- apply -f deployment.yaml
 minikube kubectl -- apply -f service.yaml
