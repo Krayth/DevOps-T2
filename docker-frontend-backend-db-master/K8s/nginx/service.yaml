@@ -7,6 +7,6 @@ spec:
     app: todo-nginx
   ports:
     - protocol: TCP
-      port: 2000
-      targetPort: 2000
+      port: 80
+      targetPort: 80
   type: ClusterIP

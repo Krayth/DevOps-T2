@@ -17,7 +17,7 @@ spec:
         image: todo-nginx
         imagePullPolicy: Never
         ports:
-        - containerPort: 2000
+        - containerPort: 80
         resources:
             limits:
               memory: "512Mi"

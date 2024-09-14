@@ -21,8 +21,10 @@ spec:
         image: mongo
         imagePullPolicy: IfNotPresent
         ports:
-          - containerPort: 3306
+          - containerPort: 27017
         env:
+          - name: MONGO_INITDB_DATABASE
+            value: todos
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
               secretKeyRef:

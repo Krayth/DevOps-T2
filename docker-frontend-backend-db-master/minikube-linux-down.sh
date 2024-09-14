@@ -1,5 +1,3 @@
-REM removendo configuracoes .yaml
-
 cd K8s
 minikube kubectl -- delete -f ingress.yaml
 
